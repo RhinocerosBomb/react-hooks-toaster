@@ -1,0 +1,57 @@
+._toaster {
+  position: fixed;
+  display: block;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  height: fit-content;
+}
+
+.bottom_right {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  align-items: flex-end;
+  bottom: 1em;
+  right: 1em;
+}
+
+.bottom_left {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  align-items: flex-end;
+  bottom: 1em;
+  left: 1em;
+}
+
+.bottom_center {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  align-items: center;
+  bottom: 1em;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.top_right {
+  display: flex;
+  flex-flow: column-reverse nowrap;
+  align-items: flex-end;
+  top: 1em;
+  right: 1em;
+}
+
+.top_left {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+  top: 1em;
+  left: 1em;
+}
+
+.top_center {
+  display: flex;
+  flex-flow: column nowrap;
+  align-items: flex-end;
+  left: 50%;
+  transform: translateX(-50%);
+}

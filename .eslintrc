@@ -1,0 +1,13 @@
+{
+  "extends": [
+    "react-app",
+    "eslint:recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "import/imports-first": ["error", "absolute-first"],
+    "import/newline-after-import": "error"
+  },
+  "plugins": ["react"],
+  "parser": "babel-eslint"
+}

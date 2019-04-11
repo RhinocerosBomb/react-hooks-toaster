@@ -1,0 +1,60 @@
+._toast {
+  position:relative;
+  color: #fff;
+  padding: 5px;
+  margin-bottom: 10px;
+  min-height: 40px;
+  padding: 7px 5px;
+  min-width: 170px;
+  text-align: center;
+  display: flex;
+  justify-content:center;
+  align-content:center;
+  flex-direction:column;
+  box-shadow: 5px 6px 8px -6px #777;
+}
+
+._toastClickable {
+  cursor: pointer;
+}
+
+.default {
+  color: #000;
+  background-color: #fff;
+}
+
+.default:hover {
+  background-color: #e8e8e8;
+}
+
+.info {
+  background-color: #3498db;
+}
+
+.info:hover {
+  background-color: #1b92e2;
+}
+
+.success {
+  background-color: #07bc0c;
+}
+
+._toastClickable.success:hover {
+  background-color: #00af05;
+}
+
+.warning {
+  background-color: #f1c40f;
+}
+
+._toastClickable.warning:hover {
+  background-color: #efb800;
+}
+
+.error {
+  background-color: #e74c3c;
+}
+
+._toastClickable.error:hover {
+  background: #e42f1c;
+}
