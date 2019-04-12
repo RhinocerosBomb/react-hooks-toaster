@@ -10,16 +10,18 @@ export default {
     file: 'dist/cjs.js',
     format: 'cjs'
   },
-  external: ['react', 'crypto'],
+  external: ['react', 'reactDOM', 'crypto', 'uuidv4', 'react-transition-group'],
   plugins: [
+    resolve(),
     babel({
       exclude: 'node_modules/**'
     }),
     postcss({
       modules: true
     }),
-    resolve(),
     sizeSnapshot(),
-    commonjs()
+    commonjs({
+      include: 'node_modules/**'
+    })
   ]
 };

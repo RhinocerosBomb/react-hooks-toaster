@@ -11,6 +11,14 @@
     "type": "git",
     "url": "https://github.com/RhinocerosBomb/react-toaster"
   },
+  "scripts": {
+    "lint": "eslint src --color",
+    "start": "react-scripts start",
+    "build": "rimraf dist && rollup -c",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "prettier-all": "prettier --write 'src/**/*.js'"
+  },
   "dependencies": {
     "classnames": "^2.2.6",
     "react-transition-group": "^2.9.0",
@@ -19,7 +27,10 @@
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
+    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.12.1",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-react-app": "^3.0.8",
     "eslint-plugin-flowtype": "^3.6.1",
@@ -39,14 +50,17 @@
     "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-size-snapshot": "^0.8.0"
   },
-  "scripts": {
-    "lint": "eslint src --color",
-    "start": "react-scripts start",
-    "build": "rimraf dist && rollup -c",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+  "peerDependencies": {
+    "react": "^16.8.6",
+    "react-dom": "^16.8.6"
   },
   "eslintConfig": {
     "extends": "react-app"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
