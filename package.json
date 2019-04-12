@@ -1,8 +1,8 @@
 {
   "name": "react-toaster",
   "version": "0.1.0",
-  "main": "dist/index.js",
-  "module": "dist/index.js",
+  "main": "dist/cjs.js",
+  "module": "dist/cjs.js",
   "files": [
     "dist",
     "README.md"
