@@ -1,5 +1,5 @@
 {
-  "name": "react-toaster",
+  "name": "react-hooks-toaster",
   "version": "0.1.0",
   "main": "dist/cjs.js",
   "module": "dist/cjs.js",
@@ -20,8 +20,6 @@
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
     "@babel/preset-env": "^7.4.3",
-    "babel-eslint": "^10.0.1",
-    "eslint": "^5.16.0",
     "eslint-config-prettier": "^4.1.0",
     "eslint-config-react-app": "^3.0.8",
     "eslint-plugin-flowtype": "^3.6.1",
@@ -38,6 +36,7 @@
     "rollup-plugin-babel": "^4.3.2",
     "rollup-plugin-commonjs": "^9.3.4",
     "rollup-plugin-node-resolve": "^4.2.3",
+    "rollup-plugin-postcss": "^2.0.3",
     "rollup-plugin-size-snapshot": "^0.8.0"
   },
   "scripts": {
