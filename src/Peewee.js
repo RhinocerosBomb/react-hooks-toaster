@@ -11,9 +11,7 @@ const Peewee = () => {
       <input type="text" value={text} onChange={e => setText(e.target.value)} />
       <button
         type="button"
-        onClick={() =>
-          buildToast(text, { type, position, duration: 2000000000000000000 })
-        }
+        onClick={() => buildToast({}, { type, position, clickToClose: false })}
       >
         ADD
       </button>

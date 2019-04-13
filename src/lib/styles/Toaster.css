@@ -5,6 +5,7 @@
   padding: 0;
   margin: 0;
   height: fit-content;
+  z-index: 99999;
 }
 
 .bottom_right {

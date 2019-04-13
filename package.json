@@ -1,6 +1,6 @@
 {
   "name": "react-hooks-toaster",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "main": "dist/cjs.js",
   "module": "dist/cjs.js",
   "files": [
@@ -21,13 +21,14 @@
   },
   "dependencies": {
     "classnames": "^2.2.6",
+    "prop-types": "^15.7.2",
     "react-transition-group": "^2.9.0",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "^7.4.3",
     "@babel/core": "^7.4.3",
-    "@babel/plugin-proposal-object-rest-spread": "^7.4.3",
+    "@babel/plugin-proposal-class-properties": "^7.4.0",
     "@babel/preset-env": "^7.4.3",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.12.1",
@@ -39,6 +40,7 @@
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
     "eslint-plugin-react-hooks": "^1.6.0",
+    "jest-enzyme": "^7.0.2",
     "prettier": "^1.16.4",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",

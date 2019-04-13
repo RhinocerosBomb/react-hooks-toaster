@@ -1,5 +1,5 @@
 ._toast {
-  position:relative;
+  position: relative;
   color: #fff;
   padding: 5px;
   margin-bottom: 10px;
@@ -8,9 +8,9 @@
   min-width: 170px;
   text-align: center;
   display: flex;
-  justify-content:center;
-  align-content:center;
-  flex-direction:column;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
   box-shadow: 5px 6px 8px -6px #777;
 }
 
@@ -23,7 +23,7 @@
   background-color: #fff;
 }
 
-.default:hover {
+._toastClickable.default:hover {
   background-color: #e8e8e8;
 }
 
@@ -31,7 +31,7 @@
   background-color: #3498db;
 }
 
-.info:hover {
+._toastClickable.info:hover {
   background-color: #1b92e2;
 }
 

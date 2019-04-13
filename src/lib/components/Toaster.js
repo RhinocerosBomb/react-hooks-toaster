@@ -4,14 +4,9 @@ import classNames from 'classnames/bind';
 
 import Toast from './Toast';
 import '../styles/Toaster.css';
+import addToast from '../buildToast';
 import ToastContext from '../context';
-import {
-  ADD_TOAST,
-  REMOVE_TOAST,
-  TYPE,
-  POSITION,
-  TRANSITION_TYPE
-} from '../constants';
+import { ADD_TOAST, REMOVE_TOAST } from '../constants';
 
 const ToastReducer = (state, action) => {
   let newState = state;
@@ -87,31 +82,6 @@ const Toaster = props => {
     dispatch({ type: REMOVE_TOAST, payload: toast });
   };
 
-  const buildToast = useCallback((content = uuidv4(), ...options) => {
-    const defaultToast = {
-      id: uuidv4(),
-      content: 'Nothing to say...',
-      type: TYPE.DEFAULT,
-      position: POSITION.BOTTOM_RIGHT,
-      duration: 5000,
-      clickToClose: true,
-      transition: {
-        type: TRANSITION_TYPE.SLIDE,
-        durations: {
-          appear: 0,
-          enter: 400,
-          exit: 400
-        }
-      }
-    };
-
-    const newToast = Object.assign(defaultToast, { content }, ...options);
-
-    dispatch({ type: ADD_TOAST, payload: newToast });
-
-    return newToast.id;
-  }, []);
-
   const buildToastRender = toastList =>
     toastList.map(toast => (
       <Toast key={toast.id} onExited={() => removeToast(toast)} {...toast} />
@@ -128,7 +98,7 @@ const Toaster = props => {
     ));
 
   return (
-    <ToastContext.Provider value={buildToast}>
+    <ToastContext.Provider value={useCallback(addToast.bind({ dispatch }), [])}>
       <React.Fragment>
         {children}
         {buildRender()}
