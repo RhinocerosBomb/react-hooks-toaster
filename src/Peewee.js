@@ -3,15 +3,17 @@ import context from './lib/context';
 
 const Peewee = () => {
   const [text, setText] = useState('');
-  const [type, setType] = useState('default');
-  const [position, setPosition] = useState('bottom_right');
   const buildToast = useContext(context);
+  const [type, setType] = useState(buildToast.TYPE.DEFAULT);
+  const [position, setPosition] = useState(buildToast.POSITION.BOTTOM_LEFT);
   return (
     <div className="Peewee">
       <input type="text" value={text} onChange={e => setText(e.target.value)} />
       <button
         type="button"
-        onClick={() => buildToast({}, { type, position, clickToClose: false })}
+        onClick={() =>
+          buildToast(text, { type, position, clickToClose: false })
+        }
       >
         ADD
       </button>
@@ -23,12 +25,12 @@ const Peewee = () => {
         <option value="error">error</option>
       </select>
       <select onChange={e => setPosition(e.target.value)} value={position}>
-        <option value="bottom_right">Bottom Right</option>
-        <option value="bottom_left">Bottom Left</option>
-        <option value="bottom_center">Bottom Center</option>
-        <option value="top_right">Top Right</option>
-        <option value="top_left">Top Left</option>
-        <option value="top_center">Top Center</option>
+        <option value={buildToast.POSITION.BOTTOM_RIGHT}>Bottom Right</option>
+        <option value={buildToast.POSITION.BOTTOM_LEFT}>Bottom Left</option>
+        <option value={buildToast.POSITION.BOTTOM_CENTER}>Bottom Center</option>
+        <option value={buildToast.POSITION.BOTTOM_RIGHT}>Top Right</option>
+        <option value={buildToast.POSITION.BOTTOM_LEFT}>Top Left</option>
+        <option value={buildToast.POSITION.BOTTOM_CENTER}>Top Center</option>
       </select>
     </div>
   );

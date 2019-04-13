@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow } from 'enzyme';
+import { mount } from 'enzyme';
 import Toast from '../components/Toast';
 
 describe('Toaster Component', () => {
   it('Should render without errors', () => {
-    const component = shallow(<Toast />);
+    const component = mount(<Toast />);
     expect(component.length).toBe(1);
   });
 });

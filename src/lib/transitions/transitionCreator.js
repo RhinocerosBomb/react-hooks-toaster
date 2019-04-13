@@ -9,7 +9,7 @@ export default (type, durations, position) => {
   };
 
   if (type === TRANSITION_TYPE.SLIDE) {
-    const targetPosition = position.split('_');
+    const targetPosition = position.split('-');
     if (targetPosition[1] === 'left' || targetPosition[1] === 'right') {
       styles.entered.transition = `${targetPosition[1]} ${
         durations.enter

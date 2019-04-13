@@ -1,6 +1,6 @@
 ._toaster {
   position: fixed;
-  display: block;
+  display: flex;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -8,24 +8,21 @@
   z-index: 99999;
 }
 
-.bottom_right {
-  display: flex;
+.bottom-right {
   flex-flow: column-reverse nowrap;
   align-items: flex-end;
   bottom: 1em;
   right: 1em;
 }
 
-.bottom_left {
-  display: flex;
+.bottom-left {
   flex-flow: column-reverse nowrap;
   align-items: flex-end;
   bottom: 1em;
   left: 1em;
 }
 
-.bottom_center {
-  display: flex;
+.bottom-center {
   flex-flow: column-reverse nowrap;
   align-items: center;
   bottom: 1em;
@@ -33,24 +30,21 @@
   transform: translateX(-50%);
 }
 
-.top_right {
-  display: flex;
+.top-right {
   flex-flow: column-reverse nowrap;
   align-items: flex-end;
   top: 1em;
   right: 1em;
 }
 
-.top_left {
-  display: flex;
+.top-left {
   flex-flow: column nowrap;
   align-items: flex-end;
   top: 1em;
   left: 1em;
 }
 
-.top_center {
-  display: flex;
+.top-center {
   flex-flow: column nowrap;
   align-items: flex-end;
   left: 50%;

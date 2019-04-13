@@ -1,13 +1,17 @@
 {
   "extends": [
-    "react-app",
     "eslint:recommended",
+    "plugin:react/recommended",
     "plugin:prettier/recommended"
   ],
-  "rules": {
-    "import/imports-first": ["error", "absolute-first"],
-    "import/newline-after-import": "error"
+  "env": {
+    "browser": true,
+    "jest": true
   },
-  "plugins": ["react"],
+  "settings": {
+    "react": {
+      "version": "detect"
+      }
+  },
   "parser": "babel-eslint"
 }
