@@ -4,10 +4,16 @@
       "@babel/preset-env",
       {
         "modules": false,
-        "targets": {"node": "current"}
+        "targets": { "node": "current" }
       }
     ],
     "@babel/preset-react"
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-proposal-object-rest-spread",
+      { "loose": true, "useBuiltIns": true }
+    ]
   ],
   "env": {
     "test": {

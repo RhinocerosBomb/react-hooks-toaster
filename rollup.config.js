@@ -10,7 +10,13 @@ export default {
     file: 'dist/cjs.js',
     format: 'cjs'
   },
-  external: ['react', 'reactDOM', 'crypto', 'uuidv4', 'react-transition-group'],
+  external: [
+    'react',
+    'uuid/v4',
+    'react-transition-group',
+    'prop-types',
+    'classnames/bind'
+  ],
   plugins: [
     resolve(),
     babel({
