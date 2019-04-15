@@ -2,10 +2,8 @@ import React, { useReducer, useCallback } from 'react';
 import uuidv4 from 'uuid/v4';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
-
 import Toast from './Toast';
 import '../styles/Toaster.css';
-import ToastContext from '../context';
 import {
   ADD_TOAST,
   REMOVE_TOAST,
@@ -80,8 +78,8 @@ const ToastReducer = (state, action) => {
   }
 };
 
-const Toaster = props => {
-  const { children } = props;
+const Toaster = ({ children, context }) => {
+  const ToasterContext = context;
   const [toastContainerList, dispatch] = useReducer(ToastReducer, []);
 
   const buildToast = (content, options) => {
@@ -119,17 +117,18 @@ const Toaster = props => {
     ));
 
   return (
-    <ToastContext.Provider value={useCallback(buildToast, [])}>
+    <ToasterContext.Provider value={useCallback(buildToast, [])}>
       <React.Fragment>
         {children}
         {renderContainers()}
       </React.Fragment>
-    </ToastContext.Provider>
+    </ToasterContext.Provider>
   );
 };
 
 Toaster.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node,
+  context: PropTypes.object.isRequired
 };
 
 export default React.memo(Toaster);

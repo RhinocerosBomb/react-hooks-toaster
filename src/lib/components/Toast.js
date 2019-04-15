@@ -28,7 +28,7 @@ const Toast = props => {
   }
 
   const handleClick = () => {
-    if (clickToClose) {
+    if (clickToClose || !triggerExit) {
       clearTimeout(timeout);
       setIn(false);
     }
@@ -58,8 +58,7 @@ const Toast = props => {
     >
       {state => (
         <li
-          role="presentation"
-          onKeyDown={() => {}}
+          role="alert"
           className={className}
           style={styles[state]}
           onClick={handleClick}
@@ -88,7 +87,15 @@ Toast.propTypes = {
     POSITION.TOP_RIGHT,
     POSITION.TOP_CENTER
   ]),
-  duration: PropTypes.number,
+  duration: (props, propName, componentName) => {
+    if (isNaN(props[propName]) && props[propName] !== false) {
+      // prettier-ignore
+      return new Error(
+        'Invalid prop `' + propName + '` supplied to' +
+        ' `' + componentName + '`. Validation failed.'
+      );
+    }
+  },
   clickToClose: PropTypes.bool,
   transition: PropTypes.shape({
     type: PropTypes.oneOf([TRANSITION_TYPE.SLIDE, TRANSITION_TYPE.CUSTOM]),
@@ -115,4 +122,4 @@ Toast.defaultProps = {
   }
 };
 
-export default React.memo(Toast);
+export default Toast;

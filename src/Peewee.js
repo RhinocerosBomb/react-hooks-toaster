@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import context from './lib/context';
+import context from './context';
 
 const Peewee = () => {
   const [text, setText] = useState('');
