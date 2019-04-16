@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import { CSSTransition } from 'react-transition-group';
 import PropTypes from 'prop-types';
 import classNames from 'classnames/bind';
@@ -11,6 +11,8 @@ const Toast = props => {
   const {
     content,
     clickToClose,
+    closeButton,
+    triggerIn,
     duration,
     position,
     type,
@@ -18,17 +20,22 @@ const Toast = props => {
     ...options
   } = props;
 
-  const [triggerExit, setIn] = useState(true);
+  const [transitionIn, setIn] = useState(triggerIn);
+
+  useEffect(() => {
+    setIn(triggerIn);
+  }, [triggerIn]);
 
   let timeout;
-  if (triggerExit && duration) {
-    timeout = setTimeout(() => {
+
+  if (transitionIn && duration) {
+    setTimeout(() => {
       setIn(false);
     }, duration);
   }
 
   const handleClick = () => {
-    if (clickToClose || !triggerExit) {
+    if (clickToClose || !transitionIn) {
       clearTimeout(timeout);
       setIn(false);
     }
@@ -51,7 +58,7 @@ const Toast = props => {
 
   return (
     <CSSTransition
-      in={triggerExit}
+      in={transitionIn}
       appear
       timeout={transition.durations}
       {...options}
@@ -64,6 +71,11 @@ const Toast = props => {
           onClick={handleClick}
         >
           {content}
+          {closeButton && (
+            <span className="_closeButton" onClick={() => setIn(false)}>
+              &#10006;
+            </span>
+          )}
         </li>
       )}
     </CSSTransition>
@@ -97,6 +109,8 @@ Toast.propTypes = {
     }
   },
   clickToClose: PropTypes.bool,
+  closeButton: PropTypes.bool,
+  triggerIn: PropTypes.bool.isRequired,
   transition: PropTypes.shape({
     type: PropTypes.oneOf([TRANSITION_TYPE.SLIDE, TRANSITION_TYPE.CUSTOM]),
     duration: PropTypes.shape({
@@ -112,6 +126,7 @@ Toast.defaultProps = {
   position: POSITION.BOTTOM_RIGHT,
   duration: 5000,
   clickToClose: true,
+  closeButton: true,
   transition: {
     type: TRANSITION_TYPE.SLIDE,
     durations: {

@@ -58,3 +58,11 @@
 ._toastClickable.error:hover {
   background: #e42f1c;
 }
+
+._closeButton {
+  position: absolute;
+  top: 0px;
+  right: 3px;
+  font-size: 12px;
+  cursor: pointer;
+}

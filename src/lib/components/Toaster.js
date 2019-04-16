@@ -2,89 +2,26 @@ import React, { useReducer, useCallback } from 'react';
 import uuidv4 from 'uuid/v4';
 import classNames from 'classnames/bind';
 import PropTypes from 'prop-types';
+
 import Toast from './Toast';
-import '../styles/Toaster.css';
+import ToastReducer from '../ToasterReducer';
 import {
   ADD_TOAST,
   REMOVE_TOAST,
+  UPDATE_ALL,
   TYPE,
   POSITION,
-  TRANSITION_TYPE
+  TRANSITION_TYPE,
+  UPDATE_TOAST
 } from '../constants';
-
-const ToastReducer = (state, action) => {
-  let newState = state;
-
-  switch (action.type) {
-    case ADD_TOAST: {
-      let addContainer = false;
-      let containerFound = false;
-      newState = state.map((toastContainer, i) => {
-        if (toastContainer.position === action.payload.position) {
-          containerFound = true;
-          return Object.assign(
-            { ...toastContainer },
-            { toasts: [...newState[i].toasts, action.payload] }
-          );
-        }
-        if (i === state.length - 1 && !containerFound) {
-          addContainer = true;
-        }
-        return toastContainer;
-      });
-
-      if (addContainer || state.length === 0) {
-        return [
-          ...state,
-          {
-            id: uuidv4(),
-            position: action.payload.position,
-            toasts: [action.payload]
-          }
-        ];
-      }
-      return newState;
-    }
-    case REMOVE_TOAST: {
-      let removeContainer = false;
-      newState = state.map(toastContainer => {
-        if (toastContainer.position === action.payload.position) {
-          if (toastContainer.toasts.length === 1) {
-            removeContainer = toastContainer;
-          } else {
-            return Object.assign(
-              { ...toastContainer },
-              {
-                toasts: toastContainer.toasts.filter(
-                  item => item !== action.payload
-                )
-              }
-            );
-          }
-        }
-        return toastContainer;
-      });
-
-      if (removeContainer) {
-        newState = state.filter(
-          toastContainer => toastContainer !== removeContainer
-        );
-      }
-
-      return newState;
-    }
-    default:
-      throw new Error();
-  }
-};
+import '../styles/Toaster.css';
 
 const Toaster = ({ children, context }) => {
   const ToasterContext = context;
   const [toastContainerList, dispatch] = useReducer(ToastReducer, []);
-
   const buildToast = (content, options) => {
     const newToast = {
-      ...{ id: uuidv4(), content },
+      ...{ id: uuidv4(), content, triggerIn: true },
       ...options
     };
 
@@ -96,9 +33,26 @@ const Toaster = ({ children, context }) => {
   buildToast.TYPE = TYPE;
   buildToast.POSITION = POSITION;
   buildToast.TRANSITION_TYPE = TRANSITION_TYPE;
+  buildToast.update = (id, updates) => updateToast(id, updates);
+  buildToast.dismiss = id => dissmiss(id);
+  buildToast.dismissAll = () => dissmissAll();
 
   const removeToast = toast => {
     dispatch({ type: REMOVE_TOAST, payload: toast });
+  };
+
+  const dissmiss = toastId => {
+    updateToast(toastId, { triggerIn: false });
+  };
+
+  const dissmissAll = () => updateAll({ triggerIn: false });
+
+  const updateAll = updates => {
+    dispatch({ type: UPDATE_ALL, payload: updates });
+  };
+
+  const updateToast = (id, updates) => {
+    dispatch({ type: UPDATE_TOAST, payload: { id, ...updates } });
   };
 
   const renderToasts = toastList =>
@@ -107,14 +61,28 @@ const Toaster = ({ children, context }) => {
     ));
 
   const renderContainers = () =>
-    toastContainerList.map(toastContainer => (
-      <ul
-        key={toastContainer.id}
-        className={classNames('_toaster', toastContainer.position)}
-      >
-        {renderToasts(toastContainer.toasts)}
-      </ul>
-    ));
+    toastContainerList.map(toastContainer => {
+      if (typeof toastContainer.position === 'object') {
+        return (
+          <ul
+            key={toastContainer.id}
+            className="_toaster"
+            style={toastContainer.position}
+          >
+            {renderToasts(toastContainer.toasts)}
+          </ul>
+        );
+      }
+
+      return (
+        <ul
+          key={toastContainer.id}
+          className={classNames('_toaster', toastContainer.position)}
+        >
+          {renderToasts(toastContainer.toasts)}
+        </ul>
+      );
+    });
 
   return (
     <ToasterContext.Provider value={useCallback(buildToast, [])}>
