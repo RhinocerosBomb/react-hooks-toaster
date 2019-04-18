@@ -1,0 +1,181 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  font-family: 'Roboto', sans-serif;
+  color: #fff;
+}
+
+body {
+  background-image: url('https://i.imgur.com/8YAq9bZ.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+  background-attachment: fixed;
+  background-position: center;
+}
+
+input[type='text'] {
+  border: 0;
+  background: 0;
+  border-bottom: 1px solid;
+  color: #fff;
+}
+
+input[type='text'],
+input[type='number'],
+select,
+option,
+button {
+  outline: none;
+}
+
+input[type='number'] {
+  background: 0;
+  color: white;
+  border: 1px solid #fff;
+  width: 60px;
+  padding: 3px;
+}
+
+select {
+  background: none;
+  border: 1px solid;
+  color: #fff;
+}
+
+select > option {
+  background: black;
+}
+
+select:after {
+  position: absolute;
+  content: '';
+  top: 14px;
+  right: 10px;
+  width: 0;
+  height: 0;
+  border: 6px solid transparent;
+  border-color: #fff transparent transparent transparent;
+}
+
+button {
+  background: none;
+  border: 1px solid #fff;
+  color: #fff;
+  flex-grow: 1;
+}
+
+button:hover {
+  background: rgba(193, 58, 0, 0.7);
+  cursor: pointer;
+}
+
+label {
+  padding-bottom: 4px;
+}
+
+.App {
+  display: flex;
+  flex-flow: row wrap;
+  width: 500px;
+  margin: 50px auto;
+}
+
+.customToast {
+  position: absolute;
+  top: -10px;
+  bottom: -10px;
+  left: -10px;
+  right: -10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.customToast.selectMode {
+  background: rgba(181, 108, 108, 0.4);
+}
+
+.customToast.selectMode:hover {
+  background: rgba(186, 43, 43, 0.4);
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 0 10px;
+  padding: 10px 0;
+}
+
+.wrapBox {
+  display: flex;
+  flex-flow: column wrap;
+  margin: 0 10px;
+}
+
+.noWrapBox {
+  display: flex;
+  flex-flow: row nowrap;
+  margin: 0 10px;
+  flex-grow: 1;
+}
+
+.text {
+  width: 100%;
+}
+
+.type {
+}
+
+.position {
+}
+
+.add {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.select {
+}
+
+.select.selected {
+  background: rgba(193, 58, 0, 0.7);
+}
+
+.dismiss {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.dismissAll {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.update {
+  flex-grow: 1;
+  margin: 0 10px;
+}
+
+.duration {
+  margin-right: 10px;
+}
+
+.duration.disabled {
+  background: rgb(166, 167, 167);
+}
+
+.customRadio {
+  width: 22px;
+  border: 1px solid white;
+  cursor: pointer;
+  border-radius: 50px;
+  margin: 0 10px;
+}
+
+.customRadio.selected {
+  background: rgba(49, 189, 53, 0.7);
+}

@@ -9,6 +9,7 @@ import { TYPE, POSITION, TRANSITION_TYPE } from '../constants';
 
 const Toast = props => {
   const {
+    id,
     content,
     clickToClose,
     closeButton,
@@ -17,6 +18,7 @@ const Toast = props => {
     position,
     type,
     transition,
+    onClick,
     ...options
   } = props;
 
@@ -34,7 +36,7 @@ const Toast = props => {
     }, duration);
   }
 
-  const handleClick = () => {
+  const handleClickToClose = () => {
     if (clickToClose || !transitionIn) {
       clearTimeout(timeout);
       setIn(false);
@@ -68,7 +70,7 @@ const Toast = props => {
           role="alert"
           className={className}
           style={styles[state]}
-          onClick={handleClick}
+          onClick={onClick ? () => onClick(id) : handleClickToClose}
         >
           {content}
           {closeButton && (
@@ -83,6 +85,7 @@ const Toast = props => {
 };
 
 Toast.propTypes = {
+  id: PropTypes.string,
   content: PropTypes.node.isRequired,
   type: PropTypes.oneOf([
     TYPE.DEFAULT,
@@ -109,6 +112,7 @@ Toast.propTypes = {
     }
   },
   clickToClose: PropTypes.bool,
+  onClick: PropTypes.func,
   closeButton: PropTypes.bool,
   triggerIn: PropTypes.bool.isRequired,
   transition: PropTypes.shape({

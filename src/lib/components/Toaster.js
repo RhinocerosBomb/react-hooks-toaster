@@ -34,9 +34,9 @@ const Toaster = ({ children, context }) => {
   buildToast.POSITION = POSITION;
   buildToast.TRANSITION_TYPE = TRANSITION_TYPE;
   buildToast.update = (id, updates) => updateToast(id, updates);
+  buildToast.updateAll = updates => updateAll(updates);
   buildToast.dismiss = id => dissmiss(id);
   buildToast.dismissAll = () => dissmissAll();
-
   const removeToast = toast => {
     dispatch({ type: REMOVE_TOAST, payload: toast });
   };
