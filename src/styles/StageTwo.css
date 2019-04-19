@@ -1,0 +1,17 @@
+.StageTwo {
+  width: 100%;
+}
+
+.localized {
+  height: 400px;
+  width: 100%;
+  box-shadow: inset 0 0 10px #000000;
+  position: relative;
+  -webkit-transform: translateZ(0);
+  overflow: hidden;
+  padding: 15px;
+}
+
+.quiz {
+  margin-bottom: 30px;
+}

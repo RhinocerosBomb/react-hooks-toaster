@@ -2,6 +2,7 @@ export const ADD_TOAST = 'ADD_TOAST';
 export const REMOVE_TOAST = 'REMOVE_TOASTs';
 export const UPDATE_ALL = 'UPDATE_ALL';
 export const UPDATE_TOAST = 'UPDATE_TOAST';
+export const UPDATE_SOME = 'UPDATE_SOME';
 
 export const POSITION = {
   TOP_LEFT: 'top-left',

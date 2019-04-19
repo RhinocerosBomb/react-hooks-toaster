@@ -80,26 +80,23 @@ label {
   display: flex;
   flex-flow: row wrap;
   width: 500px;
-  margin: 50px auto;
+  margin: 10px auto;
 }
 
-.customToast {
-  position: absolute;
-  top: -10px;
-  bottom: -10px;
-  left: -10px;
-  right: -10px;
+.prevNext {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+  border-top: 1px solid;
 }
 
-.customToast.selectMode {
-  background: rgba(181, 108, 108, 0.4);
+.prevNext > span {
+  cursor: pointer;
 }
 
-.customToast.selectMode:hover {
-  background: rgba(186, 43, 43, 0.4);
+.prevNext > span:hover {
+  color: rgba(193, 58, 0, 1);
 }
 
 .box {
@@ -117,8 +114,10 @@ label {
 }
 
 .noWrapBox {
+  height: 20px;
   display: flex;
   flex-flow: row nowrap;
+  align-items: center;
   margin: 0 10px;
   flex-grow: 1;
 }
@@ -127,18 +126,9 @@ label {
   width: 100%;
 }
 
-.type {
-}
-
-.position {
-}
-
 .add {
   flex-grow: 1;
   margin: 0 10px;
-}
-
-.select {
 }
 
 .select.selected {
@@ -169,7 +159,8 @@ label {
 }
 
 .customRadio {
-  width: 22px;
+  height: 14px;
+  width: 14px;
   border: 1px solid white;
   cursor: pointer;
   border-radius: 50px;

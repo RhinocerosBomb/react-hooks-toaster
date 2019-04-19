@@ -1,10 +1,9 @@
 ._toast {
   position: relative;
   color: #fff;
-  padding: 5px;
   margin-bottom: 10px;
   min-height: 40px;
-  padding: 7px 5px;
+  padding: 7px 15px;
   min-width: 170px;
   text-align: center;
   display: flex;

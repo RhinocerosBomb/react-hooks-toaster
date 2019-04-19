@@ -1,6 +1,12 @@
 import uuidv4 from 'uuid/v4';
 
-import { ADD_TOAST, REMOVE_TOAST, UPDATE_ALL, UPDATE_TOAST } from './constants';
+import {
+  ADD_TOAST,
+  REMOVE_TOAST,
+  UPDATE_ALL,
+  UPDATE_TOAST,
+  UPDATE_SOME
+} from './constants';
 
 export default (state, action) => {
   let newState = state;
@@ -71,6 +77,22 @@ export default (state, action) => {
           })
         }
       }));
+    case UPDATE_SOME:
+      newState = state.map(toastContainer => ({
+        ...toastContainer,
+        ...{
+          toasts: toastContainer.toasts.map(toast => {
+            let updatedToast = toast;
+            action.payload.forEach(updateData => {
+              if (updateData.id === toast.id) {
+                updatedToast = { ...updatedToast, ...updateData };
+              }
+            });
+            return updatedToast;
+          })
+        }
+      }));
+      return newState;
     case UPDATE_ALL:
       return state.map(toastContainer => ({
         ...toastContainer,

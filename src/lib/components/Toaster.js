@@ -12,7 +12,8 @@ import {
   TYPE,
   POSITION,
   TRANSITION_TYPE,
-  UPDATE_TOAST
+  UPDATE_TOAST,
+  UPDATE_SOME
 } from '../constants';
 import '../styles/Toaster.css';
 
@@ -37,6 +38,7 @@ const Toaster = ({ children, context }) => {
   buildToast.updateAll = updates => updateAll(updates);
   buildToast.dismiss = id => dissmiss(id);
   buildToast.dismissAll = () => dissmissAll();
+  buildToast.updateSome = updateList => updateSome(updateList);
   const removeToast = toast => {
     dispatch({ type: REMOVE_TOAST, payload: toast });
   };
@@ -53,6 +55,10 @@ const Toaster = ({ children, context }) => {
 
   const updateToast = (id, updates) => {
     dispatch({ type: UPDATE_TOAST, payload: { id, ...updates } });
+  };
+
+  const updateSome = updateList => {
+    dispatch({ type: UPDATE_SOME, payload: updateList });
   };
 
   const renderToasts = toastList =>
