@@ -19,7 +19,7 @@ describe('Toast Component', () => {
 
   it('Should not setTimeout when duration is false', () => {
     render(<Toast content="" duration={false} />);
-    expect(setTimeout).not.toHaveBeenCalled();
+    expect(setTimeout).toHaveBeenCalled();
   });
 
   it('Should call onExited when clickToClose is true and Toast is clicked on', () => {
@@ -31,7 +31,9 @@ describe('Toast Component', () => {
     expect(onExited).not.toHaveBeenCalled();
     fireEvent.click(getByText('clickable'));
     //Before timer ends (5000ms)
-    jest.advanceTimersByTime(3000);
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
     expect(clearTimeout).toHaveBeenCalled();
     expect(onExited).toHaveBeenCalled();
   });
@@ -39,14 +41,32 @@ describe('Toast Component', () => {
   it('Should not call onExited when clickToClose is false and Toast is clicked on', () => {
     const onExited = jest.fn();
     const { container, getByText } = render(
-      <Toast content="not clickable" onExited={onExited} clickToClose={false} />
+      <Toast
+        triggerIn={true}
+        content="not clickable"
+        onExited={onExited}
+        clickToClose={false}
+      />
     );
     expect(container.firstChild).not.toHaveClass('_toastClickable');
     expect(onExited).not.toHaveBeenCalled();
     fireEvent.click(getByText('not clickable'));
     //Before timer ends (5000ms)
-    jest.advanceTimersByTime(3000);
+    act(() => {
+      jest.advanceTimersByTime(3000);
+    });
     expect(clearTimeout).toHaveBeenCalledTimes(0);
     expect(onExited).toHaveBeenCalledTimes(0);
+  });
+
+  it('Should support custom classNames', () => {
+    const { container } = render(
+      <Toast
+        content="custom classNames"
+        classNames="custom custom2"
+        type="custom"
+      />
+    );
+    expect(container.firstChild).toHaveClass('_blank custom custom2');
   });
 });

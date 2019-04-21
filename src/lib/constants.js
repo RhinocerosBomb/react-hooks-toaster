@@ -18,7 +18,8 @@ export const TYPE = {
   SUCCESS: 'success',
   WARNING: 'warning',
   ERROR: 'error',
-  DEFAULT: 'default'
+  DEFAULT: 'default',
+  CUSTOM: 'custom'
 };
 
 export const TRANSITION_TYPE = {

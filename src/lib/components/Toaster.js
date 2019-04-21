@@ -20,10 +20,21 @@ import '../styles/Toaster.css';
 const Toaster = ({ children, context }) => {
   const ToasterContext = context;
   const [toastContainerList, dispatch] = useReducer(ToastReducer, []);
+
   const buildToast = (content, options) => {
+    let position = {};
+    if (!options || !options.position) {
+      position = { position: POSITION.BOTTOM_RIGHT };
+    } else if (
+      !Object.values(POSITION).includes(options.position) &&
+      !(typeof options.position === 'object')
+    ) {
+      throw new TypeError('Position Property Is Invalid!');
+    }
     const newToast = {
-      ...{ id: uuidv4(), content, triggerIn: true },
-      ...options
+      ...{ id: uuidv4(), content },
+      ...options,
+      ...position
     };
 
     dispatch({ type: ADD_TOAST, payload: newToast });

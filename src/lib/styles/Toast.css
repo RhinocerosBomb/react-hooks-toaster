@@ -13,6 +13,10 @@
   box-shadow: 5px 6px 8px -6px #777;
 }
 
+._customToast {
+  position: relative;
+}
+
 ._toastClickable {
   cursor: pointer;
 }

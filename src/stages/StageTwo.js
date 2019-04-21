@@ -20,8 +20,7 @@ const Localized = props => {
     } else {
       buildLocalToast('Huh... How old are you?', {
         duration: 2000,
-        type: buildLocalToast.TYPE.ERROR,
-        position: buildLocalToast.POSITION.BOTTOM_RIGHT
+        type: buildLocalToast.TYPE.ERROR
       });
       props.createGlobalFailure();
     }

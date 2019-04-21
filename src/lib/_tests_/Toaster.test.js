@@ -14,6 +14,20 @@ describe('Toaster Component', () => {
       const { getByText } = customRender(<Consumer>test</Consumer>);
       expect(getByText('test')).toBeInTheDocument();
     });
+
+    it('Should expect custom positioning to work', () => {
+      const { container } = customRender(
+        <Consumer
+          run={[
+            {
+              content: '',
+              options: { position: { top: '20px', left: '40px' } }
+            }
+          ]}
+        />
+      );
+      expect(container.firstChild).toHaveStyle('top: 20px, left: 40px');
+    });
   });
 
   describe('Render Single Toaster & Single Toast', () => {
