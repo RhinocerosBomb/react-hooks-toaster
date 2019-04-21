@@ -14,6 +14,7 @@ const Toast = props => {
     content,
     clickToClose,
     closeButton,
+    customTransitions,
     triggerIn,
     duration,
     position,
@@ -65,6 +66,7 @@ const Toast = props => {
   return (
     <CSSTransition
       in={transitionIn}
+      classNames={type === TYPE.CUSTOM && customTransitions}
       appear
       timeout={transition.durations}
       {...options}
@@ -92,6 +94,7 @@ Toast.propTypes = {
   id: PropTypes.string,
   classNames: PropTypes.string,
   content: PropTypes.node.isRequired,
+  customTransitions: PropTypes.object,
   type: PropTypes.oneOf([
     TYPE.DEFAULT,
     TYPE.INFO,
@@ -144,6 +147,7 @@ Toast.defaultProps = {
   duration: 5000,
   clickToClose: true,
   closeButton: true,
+  customTransitions: {},
   triggerIn: true,
   transition: {
     type: TRANSITION_TYPE.SLIDE,
