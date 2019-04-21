@@ -21,7 +21,7 @@ const Toast = props => {
     type,
     transition,
     onClick,
-    ...options
+    ...cssTransitionOptions
   } = props;
 
   const [transitionIn, setIn] = useState(triggerIn);
@@ -63,13 +63,16 @@ const Toast = props => {
     [transition, type]
   );
 
+  if (type === TYPE.CUSTOM) {
+    cssTransitionOptions.classNames = customTransitions;
+  }
+
   return (
     <CSSTransition
       in={transitionIn}
-      classNames={type === TYPE.CUSTOM && customTransitions}
       appear
       timeout={transition.durations}
-      {...options}
+      {...cssTransitionOptions}
     >
       {state => (
         <li

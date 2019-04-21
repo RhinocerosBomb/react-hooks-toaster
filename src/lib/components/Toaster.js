@@ -17,25 +17,25 @@ import {
 } from '../constants';
 import '../styles/Toaster.css';
 
-const Toaster = ({ children, context }) => {
+const Toaster = ({ children, context, ...defaultToastOptions }) => {
   const ToasterContext = context;
   const [toastContainerList, dispatch] = useReducer(ToastReducer, []);
 
-  const buildToast = (content, options) => {
-    let position = {};
-    if (!options || !options.position) {
-      position = { position: POSITION.BOTTOM_RIGHT };
+  const buildToast = (content, options = {}) => {
+    const newToast = {
+      ...{ id: uuidv4(), content },
+      ...defaultToastOptions,
+      ...options
+    };
+
+    if (!newToast.position) {
+      newToast.position = POSITION.BOTTOM_RIGHT;
     } else if (
-      !Object.values(POSITION).includes(options.position) &&
-      !(typeof options.position === 'object')
+      !Object.values(POSITION).includes(newToast.position) &&
+      typeof newToast.position !== 'object'
     ) {
       throw new TypeError('Position Property Is Invalid!');
     }
-    const newToast = {
-      ...{ id: uuidv4(), content },
-      ...options,
-      ...position
-    };
 
     dispatch({ type: ADD_TOAST, payload: newToast });
 
@@ -113,7 +113,52 @@ const Toaster = ({ children, context }) => {
 
 Toaster.propTypes = {
   children: PropTypes.node,
-  context: PropTypes.object.isRequired
+  context: PropTypes.object.isRequired,
+  classNames: PropTypes.string,
+  customTransitions: PropTypes.object,
+  type: PropTypes.oneOf([
+    TYPE.DEFAULT,
+    TYPE.INFO,
+    TYPE.SUCCESS,
+    TYPE.WARNING,
+    TYPE.ERROR,
+    TYPE.CUSTOM
+  ]),
+  position: PropTypes.oneOfType([
+    PropTypes.oneOf([
+      POSITION.TOP_LEFT,
+      POSITION.TOP_RIGHT,
+      POSITION.TOP_CENTER,
+      POSITION.BOTTOM_LEFT,
+      POSITION.BOTTOM_RIGHT,
+      POSITION.BOTTOM_CENTER
+    ]),
+    PropTypes.shape({
+      top: PropTypes.string,
+      bottom: PropTypes.string,
+      left: PropTypes.string,
+      right: PropTypes.string
+    })
+  ]),
+  duration: PropTypes.oneOfType([PropTypes.number, PropTypes.oneOf([false])]),
+  clickToClose: PropTypes.bool,
+  onClick: PropTypes.func,
+  closeButton: PropTypes.bool,
+  triggerIn: PropTypes.bool,
+  transition: PropTypes.shape({
+    type: PropTypes.oneOf([
+      TRANSITION_TYPE.SLIDE,
+      TRANSITION_TYPE.FADE,
+      TRANSITION_TYPE.UNFOLD,
+      TRANSITION_TYPE.ZOOM,
+      TRANSITION_TYPE.CUSTOM
+    ]),
+    durations: PropTypes.shape({
+      appear: PropTypes.number,
+      enter: PropTypes.number,
+      exit: PropTypes.number
+    })
+  })
 };
 
 export default React.memo(Toaster);

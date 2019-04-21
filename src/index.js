@@ -6,7 +6,7 @@ import context from './context';
 import './App.css';
 
 ReactDOM.render(
-  <Toaster context={context}>
+  <Toaster context={context} clickToClose={true}>
     <App />
   </Toaster>,
   document.getElementById('root')
