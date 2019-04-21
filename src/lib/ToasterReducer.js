@@ -103,6 +103,5 @@ export default (state, action) => {
         }
       }));
     default:
-      throw new Error();
   }
 };

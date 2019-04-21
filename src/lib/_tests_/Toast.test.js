@@ -14,12 +14,12 @@ describe('Toast Component', () => {
     act(() => {
       jest.advanceTimersByTime(10000);
     });
-    expect(onExited).toHaveBeenCalled();
+    expect(onExited).toHaveBeenCalledTimes(1);
   });
 
   it('Should not setTimeout when duration is false', () => {
     render(<Toast content="" duration={false} />);
-    expect(setTimeout).toHaveBeenCalled();
+    expect(setTimeout).toHaveBeenCalledTimes(1);
   });
 
   it('Should call onExited when clickToClose is true and Toast is clicked on', () => {
@@ -34,8 +34,18 @@ describe('Toast Component', () => {
     act(() => {
       jest.advanceTimersByTime(3000);
     });
-    expect(clearTimeout).toHaveBeenCalled();
-    expect(onExited).toHaveBeenCalled();
+    expect(clearTimeout).toHaveBeenCalledTimes(1);
+    expect(onExited).toHaveBeenCalledTimes(1);
+  });
+
+  it('Should not call clickToClose when onClick is provided', () => {
+    const onClick = jest.fn();
+    const { getByText } = render(
+      <Toast content="clickable" onClick={onClick} clickOnClose={true} />
+    );
+    fireEvent.click(getByText('clickable'));
+    expect(clearTimeout).not.toHaveBeenCalled();
+    expect(onClick).toHaveBeenCalledTimes(1);
   });
 
   it('Should not call onExited when clickToClose is false and Toast is clicked on', () => {
@@ -57,6 +67,17 @@ describe('Toast Component', () => {
     });
     expect(clearTimeout).toHaveBeenCalledTimes(0);
     expect(onExited).toHaveBeenCalledTimes(0);
+  });
+
+  it('Should have a close Button when closeButton prop is set to true', () => {
+    const onExited = jest.fn();
+    const { container } = render(
+      <Toast content="" onExited={onExited} closeButton={true} />
+    );
+    fireEvent.click(container.firstChild.lastChild);
+
+    expect(clearTimeout).toHaveBeenCalledTimes(1);
+    expect(onExited).toHaveBeenCalledTimes(1);
   });
 
   it('Should support custom classNames', () => {

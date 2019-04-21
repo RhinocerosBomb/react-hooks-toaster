@@ -38,8 +38,9 @@ const Toast = props => {
     }, duration);
   }
 
-  const handleClickToClose = () => {
-    if (clickToClose || !transitionIn) {
+  const manualClose = e => {
+    e.stopPropagation();
+    if (transitionIn) {
       clearTimeout(timeout);
       setIn(false);
     }
@@ -67,6 +68,14 @@ const Toast = props => {
     cssTransitionOptions.classNames = customTransitions;
   }
 
+  const toastEventHandlers = {};
+
+  if (onClick) {
+    toastEventHandlers.onClick = () => onClick(id);
+  } else if (clickToClose) {
+    toastEventHandlers.onClick = e => manualClose(e);
+  }
+
   return (
     <CSSTransition
       in={transitionIn}
@@ -79,11 +88,11 @@ const Toast = props => {
           role="alert"
           className={className}
           style={styles[state]}
-          onClick={onClick ? () => onClick(id) : handleClickToClose}
+          {...toastEventHandlers}
         >
           {content}
           {closeButton && (
-            <span className="_closeButton" onClick={() => setIn(false)}>
+            <span className="_closeButton" onClick={manualClose}>
               &#10006;
             </span>
           )}

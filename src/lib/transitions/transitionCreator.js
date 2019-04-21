@@ -4,33 +4,35 @@ export default (type, durations, position, isCustomPosition) => {
   const styles = {
     entering: {},
     entered: {},
-    exiting: {},
-    exited: {}
+    exiting: {}
   };
 
   if (type === TRANSITION_TYPE.SLIDE) {
     if (!isCustomPosition) {
       const targetPosition = position.split('-');
       if (targetPosition[1] === 'left' || targetPosition[1] === 'right') {
+        styles.entering[targetPosition[1]] = 'calc(-100% - 1em)';
+        styles.entered[targetPosition[1]] = 0;
+        styles.exiting[targetPosition[1]] = 'calc(-100% - 1em)';
+
         styles.entered.transition = `${targetPosition[1]} ${
           durations.enter
         }ms linear`;
-        styles.entering[targetPosition[1]] = 'calc(-100% - 1em)';
-        styles.entered[targetPosition[1]] = 0;
+
         styles.exiting.transition = `${targetPosition[1]} ${
           durations.exit
         }ms linear`;
-        styles.exiting[targetPosition[1]] = 'calc(-100% - 1em)';
       } else {
+        styles.entering[targetPosition[0]] = 'calc(-100% - 1em)';
+        styles.entered[targetPosition[0]] = 0;
+        styles.exiting[targetPosition[0]] = 'calc(-100% - 1em)';
+
         styles.entered.transition = `${targetPosition[0]} ${
           durations.enter
         }ms linear`;
-        styles.entering[targetPosition[0]] = 'calc(-100% - 1em)';
-        styles.entered[targetPosition[0]] = 0;
         styles.exiting.transition = `${targetPosition[0]} ${
           durations.exit
         }ms linear`;
-        styles.exiting[targetPosition[0]] = 'calc(-100% - 1em)';
       }
     }
   } else if (type === TRANSITION_TYPE.FADE) {
