@@ -14,6 +14,7 @@ export default () => {
   const handleClick = () => {
     buildToast(text, {
       type,
+      transition: { type: 'zoom', durations: { enter: 300, exit: 400 } },
       position,
       clickToClose,
       duration: autoClose && duration,

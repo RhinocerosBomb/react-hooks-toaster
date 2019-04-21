@@ -17,7 +17,7 @@
 
 .bottom-left {
   flex-flow: column-reverse nowrap;
-  align-items: flex-end;
+  align-items: flex-start;
   bottom: 1em;
   left: 1em;
 }
@@ -39,7 +39,7 @@
 
 .top-left {
   flex-flow: column nowrap;
-  align-items: flex-end;
+  align-items: flex-start;
   top: 1em;
   left: 1em;
 }

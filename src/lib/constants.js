@@ -24,5 +24,8 @@ export const TYPE = {
 
 export const TRANSITION_TYPE = {
   SLIDE: 'slide',
+  FADE: 'fade',
+  UNFOLD: 'unfold',
+  ZOOM: 'zoom',
   CUSTOM: 'custom'
 };

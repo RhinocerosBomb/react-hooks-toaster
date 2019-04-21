@@ -122,8 +122,14 @@ Toast.propTypes = {
   closeButton: PropTypes.bool,
   triggerIn: PropTypes.bool,
   transition: PropTypes.shape({
-    type: PropTypes.oneOf([TRANSITION_TYPE.SLIDE, TRANSITION_TYPE.CUSTOM]),
-    duration: PropTypes.shape({
+    type: PropTypes.oneOf([
+      TRANSITION_TYPE.SLIDE,
+      TRANSITION_TYPE.FADE,
+      TRANSITION_TYPE.UNFOLD,
+      TRANSITION_TYPE.ZOOM,
+      TRANSITION_TYPE.CUSTOM
+    ]),
+    durations: PropTypes.shape({
       appear: PropTypes.number,
       enter: PropTypes.number,
       exit: PropTypes.number
